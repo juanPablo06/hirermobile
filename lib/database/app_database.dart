@@ -5,24 +5,31 @@ import 'package:sqflite/sqflite.dart';
 Future<Database> createDatabase() {
   return getDatabasesPath().then((dbPath) {
     final String path = join(dbPath, 'hirer.db');
-    return openDatabase(path, onCreate: (db, version) {
-      db.execute(
-        'CREATE TABLE curriculos ('
-        'id INTEGER PRIMARY KEY, '
-        'name TEXT, '
-        'description TEXT, '
-        'age TEXT, '
-        'nationality TEXT, '
-        'adress TEXT, '
-        'email TEXT, '
-        'telephone TEXT, '
-        'skills TEXT, '
-        'professionalObjectives TEXT, '
-        'languages TEXT, '
-        'certifications TEXT'
-        ')',
-      );
-    }, version: 1);
+    return openDatabase(
+      path,
+      onCreate: (db, version) {
+        db.execute(
+          'CREATE TABLE curriculos ('
+          'id INTEGER PRIMARY KEY, '
+          'name TEXT, '
+          'description TEXT, '
+          'age TEXT, '
+          'nationality TEXT, '
+          'adress TEXT, '
+          'email TEXT, '
+          'telephone TEXT, '
+          'skills TEXT, '
+          'professionalObjectives TEXT, '
+          'languages TEXT, '
+          'certifications TEXT'
+          ')',
+        );
+      },
+      version: 1,
+      /*
+      onDowngrade: onDatabaseDowngradeDelete,
+      */
+    );
   });
 }
 

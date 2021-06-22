@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hirermobile/components/editor.dart';
+import 'package:hirermobile/database/app_database.dart';
 import 'package:hirermobile/models/curriculo.dart';
 
 class FormCurriculos extends StatefulWidget {
@@ -118,6 +119,6 @@ class FormCurriculoState extends State<FormCurriculos> {
         skills,
         certifications,
         languages);
-    Navigator.pop(context, curriculoCriado);
+    save(curriculoCriado).then((id) => Navigator.pop(context));
   }
 }

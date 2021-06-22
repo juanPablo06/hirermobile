@@ -5,22 +5,6 @@ import 'package:hirermobile/screens/curriculo/lista.dart';
 
 void main() {
   runApp(HirerApp());
-  save(Curriculo(
-          0,
-          'Juan Pablo',
-          'Oi, eu sou o juan',
-          '20 anos',
-          'Brasileiro',
-          'juan34063@gmail.com',
-          '31998126811',
-          'Ibirité - MG',
-          'Ganhar dinheiro',
-          'Flutter',
-          'AWS Django',
-          'Inglês'))
-      .then((id) {
-    findAll().then((curriculos) => debugPrint(curriculos.toString()));
-  });
 }
 
 class HirerApp extends StatelessWidget {

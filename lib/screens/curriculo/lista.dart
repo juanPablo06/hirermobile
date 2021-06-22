@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:hirermobile/database/app_database.dart';
 import 'package:hirermobile/models/curriculo.dart';
 import 'package:hirermobile/screens/curriculo/form.dart';
 
 class ListaCurriculos extends StatefulWidget {
-  final List<Curriculo?> _curriculos = [];
-
   @override
-  State<StatefulWidget> createState() {
-    return ListaCurriculosState();
-  }
+  _ListaCurriculosState createState() => _ListaCurriculosState();
 }
 
-class ListaCurriculosState extends State<ListaCurriculos> {
+class _ListaCurriculosState extends State<ListaCurriculos> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,11 +30,40 @@ class ListaCurriculosState extends State<ListaCurriculos> {
             style: TextStyle(fontSize: 16),
           ),
           Expanded(
-            child: ListView.builder(
-              itemCount: widget._curriculos.length,
-              itemBuilder: (context, index) {
-                final curriculo = widget._curriculos[index];
-                return ItemCurriculo(curriculo!);
+            child: FutureBuilder<List<Curriculo>>(
+              initialData: [],
+              future: findAll(),
+              builder: (BuildContext context, AsyncSnapshot snapshot) {
+                switch (snapshot.connectionState) {
+                  case ConnectionState.none:
+                    // TODO: Handle this case.
+                    break;
+                  case ConnectionState.waiting:
+                    return Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          CircularProgressIndicator(),
+                          Text('Loading')
+                        ],
+                      ),
+                    );
+                    break;
+                  case ConnectionState.active:
+                    // TODO: Handle this case.
+                    break;
+                  case ConnectionState.done:
+                    final List<Curriculo> _curriculos = snapshot.data;
+                    return ListView.builder(
+                      itemCount: _curriculos.length,
+                      itemBuilder: (context, index) {
+                        final Curriculo? curriculo = _curriculos[index];
+                        return ItemCurriculo(curriculo!);
+                      },
+                    );
+                }
+                return Text('Unknown error');
               },
             ),
           ),
@@ -46,17 +72,11 @@ class ListaCurriculosState extends State<ListaCurriculos> {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () {
-          final Future<Curriculo?> future =
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return FormCurriculos();
-          }));
-          future.then((curriculoRecebido) {
-            if (curriculoRecebido != null) {
-              setState(() {
-                widget._curriculos.add(curriculoRecebido);
-              });
-            }
-          });
+          Navigator.of(context)
+              .push(MaterialPageRoute(
+                builder: (context) => FormCurriculos(),
+              ))
+              .then((value) => setState(() {}));
         },
       ),
     );
