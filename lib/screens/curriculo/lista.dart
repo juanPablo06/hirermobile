@@ -20,6 +20,7 @@ class _ListaCurriculosState extends State<ListaCurriculos> {
         ),
         centerTitle: true,
       ),
+      backgroundColor: Colors.grey[100],
       body: Column(
         children: [
           Image.asset(
@@ -167,7 +168,6 @@ class ItemCurriculo extends StatelessWidget {
               style: TextStyle(fontWeight: FontWeight.w600),
               overflow: TextOverflow.clip,
             ),
-            _elementsDivider(),
           ],
         ),
       ),
