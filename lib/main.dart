@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hirermobile/database/app_database.dart';
-import 'package:hirermobile/models/curriculo.dart';
 import 'package:hirermobile/screens/curriculo/lista.dart';
 
 void main() {

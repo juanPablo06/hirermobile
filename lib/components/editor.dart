@@ -20,12 +20,14 @@ class Editor extends StatelessWidget {
         controller: controller,
         style: TextStyle(fontSize: 16),
         keyboardType: TextInputType.text,
+        maxLength: 100,
         decoration: InputDecoration(
             labelStyle: TextStyle(color: Colors.red[800]),
             hintText: hint,
             labelText: label,
             focusColor: Colors.red[900],
             hoverColor: Colors.red[900],
+            border: OutlineInputBorder(),
             focusedBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: Colors.redAccent),
             )),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hirermobile/components/editor.dart';
-import 'package:hirermobile/database/app_database.dart';
+import 'package:hirermobile/database/dao/curriculo_dao.dart';
 import 'package:hirermobile/models/curriculo.dart';
 
 class FormCurriculos extends StatefulWidget {
@@ -25,11 +25,16 @@ class FormCurriculoState extends State<FormCurriculos> {
       TextEditingController();
   final TextEditingController _controllerLanguages = TextEditingController();
 
+  final CurriculoDao _dao = CurriculoDao();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Criando Currículo'),
+        title: Text(
+          'Criando Currículo',
+          style: TextStyle(fontFamily: 'Staatliches', letterSpacing: 1.2),
+        ),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -82,7 +87,9 @@ class FormCurriculoState extends State<FormCurriculos> {
                 primary: Colors.red[800],
                 padding: EdgeInsets.fromLTRB(24, 8, 24, 8),
                 elevation: 16,
-                textStyle: TextStyle(fontSize: 16),
+                textStyle: TextStyle(
+                  fontSize: 16,
+                ),
               ),
               onPressed: () => _criaCurriculo(context),
             )
@@ -119,6 +126,6 @@ class FormCurriculoState extends State<FormCurriculos> {
         skills,
         certifications,
         languages);
-    save(curriculoCriado).then((id) => Navigator.pop(context));
+    _dao.save(curriculoCriado).then((id) => Navigator.pop(context));
   }
 }
