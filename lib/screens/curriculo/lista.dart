@@ -103,7 +103,7 @@ class ItemCurriculo extends StatelessWidget {
       overflow: TextOverflow.clip,
     );
     return Container(
-      height: 400,
+      height: 500,
       margin: EdgeInsets.fromLTRB(0, 24, 0, 0),
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
@@ -157,6 +157,13 @@ class ItemCurriculo extends StatelessWidget {
             _elementsDivider(),
             Text(
               'Certificações: ${_curriculo.certifications}',
+              textAlign: TextAlign.start,
+              style: TextStyle(fontWeight: FontWeight.w600),
+              overflow: TextOverflow.clip,
+            ),
+            _elementsDivider(),
+            Text(
+              'Objetivos: ${_curriculo.professionalObjectives}',
               textAlign: TextAlign.start,
               style: TextStyle(fontWeight: FontWeight.w600),
               overflow: TextOverflow.clip,
